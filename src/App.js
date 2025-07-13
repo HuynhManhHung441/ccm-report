@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './App.css';
 
 import GeneralSection from './components/GeneralSection';
@@ -7,6 +8,15 @@ import LadleArrivalSection from './components/LadleArrivalSection';
 import TundishSection from './components/TundishSection';
 
 function App() {
+  const [info, setInfo] = useState(null);
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/heat-report')
+      .then(res => setInfo(res.data))
+      .catch(err => console.error('Lỗi gọi API:', err));
+  }, []);
+
+  if (!info) return <div>Đang tải dữ liệu...</div>;
   return (
     <div className="container">
       {/* Header */}
@@ -15,13 +25,13 @@ function App() {
         <img src="/assets/images/LogoGangThepBlue.png" alt="Hòa Phát Logo" className="logo" />
       </div>
 
-      {/* Thông tin tổng quan */}
+      {/* Thông tin tổng quan từ SQL Server */}
       <div className="info-grid">
-        <div><span className="label">Heat:</span> <span className="value">25F003353</span></div>
-        <div><span className="label">Prod. Date:</span> <span className="value">28/06/2025 15:35</span></div>
-        <div><span className="label">Plan:</span> <span className="value">P04606</span></div>
-        <div><span className="label">Steel Grade:</span> <span className="value">S275JR-2</span></div>
-        <div><span className="label">Shift:</span> <span className="value">A</span></div>
+        <div><span className="label">Heat:</span> <span className="value">{info.HEAT_NAME}</span></div>
+        <div><span className="label">Prod. Date:</span> <span className="value">{info.LADLE_OPEN_TIME}</span></div>
+        <div><span className="label">Plan:</span> <span className="value">{info.PLAN_NAME}</span></div>
+        <div><span className="label">Steel Grade:</span> <span className="value">{info.STEEL_GRADE}</span></div>
+        <div><span className="label">Shift:</span> <span className="value">{info.SHIFT_TEAM_NAME}</span></div>
         <div><span className="label">Foreman:</span> <span className="value"></span></div>
       </div>
 
