@@ -11,9 +11,10 @@ function App() {
   const [info, setInfo] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/heat-report')
+    // Gọi API lấy dữ liệu phần Header
+    axios.get('http://localhost:5000/api/heat-report/general')
       .then(res => setInfo(res.data))
-      .catch(err => console.error('Lỗi gọi API:', err));
+      .catch(err => console.error('❌ Lỗi gọi API:', err));
   }, []);
 
   if (!info) return <div>Đang tải dữ liệu...</div>;
