@@ -37,7 +37,48 @@ const getGeneralSectionInfo = async (req, res) => {
   }
 };
 
+// Phần LADLE Section
+const getLadleSectionInfo = async (req, res) => {
+  try {
+    const db = await connectDB();
+    const result = await db.query(`
+      SELECT TOP 1 
+        LADLE_NAME, TURRET_ARM
+      FROM [CC2PRD].[CCM].[V_REP_HEAT]
+      WHERE HEAT_NAME = '25F003353'
+    `);
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error('❌ Lỗi truy vấn Ladle Section:', err);
+    res.status(500).send('Lỗi truy vấn dữ liệu phần Ladle');
+  }
+};
+
+// Phần LADLE ARRIVAL Section
+const getLadleArrivalInfo = async (req, res) => {
+  try {
+    const db = await connectDB();
+    const result = await db.query(`
+      SELECT TOP(1)
+        FORMAT(LADLE_ARRIVE_TIME, 'HH:mm') AS LADLE_ARRIVE_TIME, 
+        (TEMP_BEFORE_CASTER - 273.15) AS TEMP_BEFORE_CASTER,
+        (STEEL_NET_WEIGHT / 1000) AS STEEL_NET_WEIGHT,
+        (LADLE_ARRIVE_WEIGHT /1000) AS LADLE_ARRIVE_WEIGHT,
+        (LADLE_TARE_WEIGHT / 1000) AS LADLE_TARE_WEIGHT
+      FROM [CC2PRD].[CCM].[V_REP_HEAT]
+      WHERE HEAT_NAME = '25F003353'
+    `);
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error('❌ Lỗi truy vấn Ladle Arrival:', err);
+    res.status(500).send('Lỗi truy vấn dữ liệu phần Ladle Arrival');
+  }
+};
+
+
 module.exports = {
   getGeneralInfo,
-  getGeneralSectionInfo
+  getGeneralSectionInfo,
+  getLadleSectionInfo,
+  getLadleArrivalInfo
 };
