@@ -13,7 +13,7 @@ function LadleArrivalSection() {
   if (!data) return <div className="section">Đang tải dữ liệu LADLE ARRIVAL...</div>;
 
   return (
-    <div className="section">
+    <div className="section ladle-arrival-section">
       <div className="section-title">LADLE ARRIVAL</div>
       <div className="data-grid">
         <div className="data-item"><span className="label">Time</span> <span className="value">{data.LADLE_ARRIVE_TIME}</span></div>

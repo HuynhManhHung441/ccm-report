@@ -6,6 +6,7 @@ router.get('/general', heatController.getGeneralInfo);
 router.get('/general-section', heatController.getGeneralSectionInfo);
 router.get('/ladle-section', heatController.getLadleSectionInfo);
 router.get('/ladle-arrival', heatController.getLadleArrivalInfo);
+router.get('/tundish', heatController.getTundishInfo);
 
 
 module.exports = router;

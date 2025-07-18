@@ -6,6 +6,9 @@ import GeneralSection from './components/GeneralSection';
 import LadleSection from './components/LadleSection';
 import LadleArrivalSection from './components/LadleArrivalSection';
 import TundishSection from './components/TundishSection';
+import ShroudSection from './components/ShroudSection';
+import SteelLossSection from './components/SteelLossSection';
+import OperatorCommentSection from './components/OperatorCommentSection';
 
 function App() {
   const [info, setInfo] = useState(null);
@@ -26,7 +29,6 @@ function App() {
         <img src="/assets/images/LogoGangThepBlue.png" alt="Hòa Phát Logo" className="logo" />
       </div>
 
-      {/* Thông tin tổng quan từ SQL Server */}
       <div className="info-grid">
         <div><span className="label">Heat:</span> <span className="value">{info.HEAT_NAME}</span></div>
         <div><span className="label">Prod. Date:</span> <span className="value">{info.LADLE_OPEN_TIME}</span></div>
@@ -36,12 +38,29 @@ function App() {
         <div><span className="label">Foreman:</span> <span className="value"></span></div>
       </div>
 
-      {/* Các phần báo cáo */}
       <div className="section-row">
-        <GeneralSection />
-        <LadleSection />
-        <LadleArrivalSection />
-        <TundishSection />
+        {/* Cột 1: General + Operator Comment */}
+        <div className="column">
+          <GeneralSection />
+          <OperatorCommentSection />
+        </div>
+
+        {/* Cột 2: Ladle + Shroud + Steel Loss */}
+        <div className="column">
+          <LadleSection />
+          <ShroudSection />
+          <SteelLossSection />
+        </div>
+
+        {/* Cột 3: Ladle Arrival */}
+        <div className="column">
+          <LadleArrivalSection />
+        </div>
+
+        {/* Cột 4: Tundish */}
+        <div className="column">
+          <TundishSection />
+        </div>
       </div>
     </div>
   );

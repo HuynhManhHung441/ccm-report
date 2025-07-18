@@ -13,11 +13,11 @@ function LadleSection() {
   if (!data) return <div className="section">Đang tải dữ liệu LADLE...</div>;
 
   return (
-    <div className="section">
+    <div className="section ladle-section">
       <div className="section-title">LADLE</div>
       <div className="data-grid">
-        <div className="data-item"><span className="label">Ladle No.:</span> <span className="value">{data.LADLE_NAME}</span></div>
-        <div className="data-item"><span className="label">Turret Arm:</span> <span className="value">{data.TURRET_ARM}</span></div>
+        <div className="data-item"><span className="label">Ladle No.</span> <span className="value">{data.LADLE_NAME}</span></div>
+        <div className="data-item"><span className="label">Turret Arm</span> <span className="value">{data.TURRET_ARM}</span></div>
       </div>
     </div>
   );
