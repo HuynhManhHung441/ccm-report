@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function TundishSection() {
+function TundishSection({heatName}) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/heat-report/tundish')
+    axios.get(`http://localhost:5000/api/heat-report/tundish/${heatName}`)
       .then(res => setData(res.data))
       .catch(err => console.error('Lỗi gọi API Tundish:', err));
-  }, []);
+  }, [heatName]);
 
   if (!data) return <div className="section">Đang tải dữ liệu TUNDISH...</div>;
 

@@ -12,13 +12,13 @@ import OperatorCommentSection from './components/OperatorCommentSection';
 
 function App() {
   const [info, setInfo] = useState(null);
-
+  const heatName = '25F003302';
   useEffect(() => {
     // Gọi API lấy dữ liệu phần Header
-    axios.get('http://localhost:5000/api/heat-report/general')
+    axios.get(`http://localhost:5000/api/heat-report/general-info/${heatName}`)
       .then(res => setInfo(res.data))
       .catch(err => console.error('❌ Lỗi gọi API:', err));
-  }, []);
+  }, [heatName]);
 
   if (!info) return <div>Đang tải dữ liệu...</div>;
   return (
@@ -41,25 +41,25 @@ function App() {
       <div className="section-row">
         {/* Cột 1: General + Operator Comment */}
         <div className="column">
-          <GeneralSection />
+          <GeneralSection heatName={heatName} />
           <OperatorCommentSection />
         </div>
 
         {/* Cột 2: Ladle + Shroud + Steel Loss */}
         <div className="column">
-          <LadleSection />
-          <ShroudSection />
+          <LadleSection heatName={heatName} />
+          <ShroudSection heatName={heatName} />
           <SteelLossSection />
         </div>
 
         {/* Cột 3: Ladle Arrival */}
         <div className="column">
-          <LadleArrivalSection />
+          <LadleArrivalSection heatName={heatName} />
         </div>
 
         {/* Cột 4: Tundish */}
         <div className="column">
-          <TundishSection />
+          <TundishSection heatName={heatName} />
         </div>
       </div>
     </div>
