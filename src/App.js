@@ -12,7 +12,7 @@ import OperatorCommentSection from './components/OperatorCommentSection';
 
 function App() {
   const [info, setInfo] = useState(null);
-  const heatName = '25F003302';
+  const heatName = '25F003335';
   useEffect(() => {
     // Gọi API lấy dữ liệu phần Header
     axios.get(`http://localhost:5000/api/heat-report/general-info/${heatName}`)
@@ -49,7 +49,7 @@ function App() {
         <div className="column">
           <LadleSection heatName={heatName} />
           <ShroudSection heatName={heatName} />
-          <SteelLossSection />
+          <SteelLossSection heatName={heatName} />
         </div>
 
         {/* Cột 3: Ladle Arrival */}

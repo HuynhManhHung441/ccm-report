@@ -120,7 +120,32 @@ const getShroudInfo = async (req, res) => {
     res.status(500).send('Lỗi truy vấn dữ liệu phần Shroud');
   }
 };
-
+const getSteelLossInfo = async (req, res) => {
+  const { heatName } = req.params;
+  try {
+    const db = await connectDB();
+    const result = await db.query(`
+      SELECT 
+        h.HEAT_NAME,
+        s.HEAT_ID,
+        ROUND(s.OTHER_STEEL_LOSS /1000, 3) AS OTHER_STEEL_LOSS,
+        ROUND(s.HEAD_CROP_WEIGHT_CUTTED /1000, 3) AS HEAD_CROP_WEIGHT_CUTTED,
+        ROUND(s.TAIL_CROP_WEIGHT_CUTTED /1000, 3) AS TAIL_CROP_WEIGHT_CUTTED,
+        ROUND(s.TUND_SKULL_WEIGHT /1000, 3) AS TUND_SKULL_WEIGHT,
+        ROUND(s.CUT_LOSS_WEIGHT /1000, 3) AS CUT_LOSS_WEIGHT,
+        ROUND(s.SAMPLE_WEIGHT /1000, 3) AS SAMPLE_WEIGHT
+      FROM 
+        [CC2PRD].[CCM].[V_REP_STEEL_LOSS] AS s
+      INNER JOIN 
+        [CC2PRD].[CCM].[V_REP_HEAT] AS h ON s.HEAT_ID = h.HEAT_ID
+      WHERE h.HEAT_NAME = '${heatName}';
+    `);
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error('❌ Lỗi truy vấn Tundish:', err);
+    res.status(500).send('Lỗi truy vấn dữ liệu phần Tundish');
+  }
+};
 
 module.exports = {
   getGeneralInfo,
@@ -128,5 +153,6 @@ module.exports = {
   getLadleSectionInfo,
   getLadleArrivalInfo,
   getTundishInfo,
-  getShroudInfo
+  getShroudInfo,
+  getSteelLossInfo
 };
