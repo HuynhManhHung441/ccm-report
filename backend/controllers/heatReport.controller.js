@@ -120,6 +120,7 @@ const getShroudInfo = async (req, res) => {
     res.status(500).send('Lỗi truy vấn dữ liệu phần Shroud');
   }
 };
+
 const getSteelLossInfo = async (req, res) => {
   const { heatName } = req.params;
   try {
@@ -147,6 +148,58 @@ const getSteelLossInfo = async (req, res) => {
   }
 };
 
+const getLadleDepartureInfo = async (req, res) => {
+  const { heatName } = req.params;
+  try {
+    const db = await connectDB();
+    const result = await db.query(`
+      SELECT
+          h.HEAT_NAME,
+          rht.HEAT_COUNTER,
+          t.TUNDISH_NAME,
+          t.TUNDISH_CAR,
+          ROUND(h.TUND_WEIGHT_AT_OPEN / 1000.0, 1) AS TUND_WEIGHT_AT_OPEN_TON,
+          ROUND(h.TUND_WEIGHT_AT_CLOSE / 1000.0, 1) AS TUND_WEIGHT_AT_CLOSE_TON
+      FROM [CC2PRD].[CCM].[REF_HEAT_TUNDISH] AS rht
+      INNER JOIN [CC2PRD].[CCM].[TUNDISH] AS t
+          ON rht.TD_INSTALLATION_ID = t.TD_INSTALLATION_ID
+      INNER JOIN [CC2PRD].[CCM].[HEAT] AS h
+          ON rht.HEAT_ID = h.HEAT_ID
+      WHERE h.HEAT_NAME = '${heatName}';
+    `);
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error('❌ Lỗi truy vấn Tundish:', err);
+    res.status(500).send('Lỗi truy vấn dữ liệu phần Tundish');
+  }
+};
+
+const getTundishMaterialInfo = async (req, res) => {
+  const { heatName } = req.params;
+  try {
+    const db = await connectDB();
+    const result = await db.query(`
+      SELECT
+          h.HEAT_NAME,
+          rht.HEAT_COUNTER,
+          t.TUNDISH_NAME,
+          t.TUNDISH_CAR,
+          ROUND(h.TUND_WEIGHT_AT_OPEN / 1000.0, 1) AS TUND_WEIGHT_AT_OPEN_TON,
+          ROUND(h.TUND_WEIGHT_AT_CLOSE / 1000.0, 1) AS TUND_WEIGHT_AT_CLOSE_TON
+      FROM [CC2PRD].[CCM].[REF_HEAT_TUNDISH] AS rht
+      INNER JOIN [CC2PRD].[CCM].[TUNDISH] AS t
+          ON rht.TD_INSTALLATION_ID = t.TD_INSTALLATION_ID
+      INNER JOIN [CC2PRD].[CCM].[HEAT] AS h
+          ON rht.HEAT_ID = h.HEAT_ID
+      WHERE h.HEAT_NAME = '${heatName}';
+    `);
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error('❌ Lỗi truy vấn Tundish:', err);
+    res.status(500).send('Lỗi truy vấn dữ liệu phần Tundish');
+  }
+};
+
 module.exports = {
   getGeneralInfo,
   getGeneralSectionInfo,
@@ -154,5 +207,7 @@ module.exports = {
   getLadleArrivalInfo,
   getTundishInfo,
   getShroudInfo,
-  getSteelLossInfo
+  getSteelLossInfo,
+  getLadleDepartureInfo,
+  getTundishMaterialInfo
 };

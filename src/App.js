@@ -9,6 +9,8 @@ import TundishSection from './components/TundishSection';
 import ShroudSection from './components/ShroudSection';
 import SteelLossSection from './components/SteelLossSection';
 import OperatorCommentSection from './components/OperatorCommentSection';
+import LadleDepartureSection from './components/LadleDepartureSection';
+import TundishMaterialSection from './components/TundishMaterialSection';
 
 function App() {
   const [info, setInfo] = useState(null);
@@ -55,11 +57,13 @@ function App() {
         {/* Cột 3: Ladle Arrival */}
         <div className="column">
           <LadleArrivalSection heatName={heatName} />
+          <LadleDepartureSection heatName={heatName} />
         </div>
 
         {/* Cột 4: Tundish */}
         <div className="column">
           <TundishSection heatName={heatName} />
+          <TundishMaterialSection heatName={heatName} />
         </div>
       </div>
     </div>
