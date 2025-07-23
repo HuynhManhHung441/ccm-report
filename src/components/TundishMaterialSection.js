@@ -16,11 +16,9 @@ function TundishMaterialSection({heatName}) {
     <div className="section tundish-section">
       <div className="section-title">TUNDISH MATERIAL</div>
       <div className="data-grid">
-        <div className="data-item"><span className="label">Number</span> <span className="value">{data.TUNDISH_NAME}</span></div>
-        <div className="data-item"><span className="label">Car</span> <span className="value">{data.TUNDISH_CAR}</span></div>
-        <div className="data-item"><span className="label">Heat Counter</span> <span className="value">{data.HEAT_COUNTER}</span></div>
-        <div className="data-item"><span className="label">Weight Ladle Open</span> <span className="value">{data.TUND_WEIGHT_AT_OPEN_TON} t</span></div>
-        <div className="data-item"><span className="label">Weight Ladle Close</span> <span className="value">{data.TUND_WEIGHT_AT_CLOSE_TON} t</span></div>
+        <div className="data-item"><span className="label">Slag Powder</span> <span className="value">{data.TD_SLAG_NAME}</span></div>
+        <div className="data-item"><span className="label">Insulation Powder</span> <span className="value">{data.TD_INSUL_NAME}</span></div>
+        <div className="data-item"><span className="label">Spray Material</span> <span className="value">{data.TUND_SPRAY_MATERIAL}</span></div>
       </div>
     </div>
   );

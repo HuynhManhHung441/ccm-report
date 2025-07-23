@@ -16,11 +16,11 @@ function LadleDepartureSection({heatName}) {
     <div className="section tundish-section">
       <div className="section-title">LADLE DEPARTURE</div>
       <div className="data-grid">
-        <div className="data-item"><span className="label">Number</span> <span className="value">{data.TUNDISH_NAME}</span></div>
-        <div className="data-item"><span className="label">Car</span> <span className="value">{data.TUNDISH_CAR}</span></div>
-        <div className="data-item"><span className="label">Heat Counter</span> <span className="value">{data.HEAT_COUNTER}</span></div>
-        <div className="data-item"><span className="label">Weight Ladle Open</span> <span className="value">{data.TUND_WEIGHT_AT_OPEN_TON} t</span></div>
-        <div className="data-item"><span className="label">Weight Ladle Close</span> <span className="value">{data.TUND_WEIGHT_AT_CLOSE_TON} t</span></div>
+        <div className="data-item"><span className="label">Time</span> <span className="value">{data.LADLE_DEPART_TIME}</span></div>
+        <div className="data-item"><span className="label">Pouring Start/End</span> <span className="value">{data.LADLE_OPEN_TIME} - {data.LADLE_CLOSE_TIME}</span></div>
+        <div className="data-item"><span className="label">Pouring Duration</span> <span className="value">{data.POURING_DURATION} min</span></div>
+        <div className="data-item"><span className="label">Steel Output Weight</span> <span className="value">{data.LADLE_OUTPUT_WEIGHT} t</span></div>
+        <div className="data-item"><span className="label">End Gross Weight</span> <span className="value">{data.LADLE_DEPART_WEIGHT} t</span></div>
       </div>
     </div>
   );

@@ -148,24 +148,24 @@ const getSteelLossInfo = async (req, res) => {
   }
 };
 
+
 const getLadleDepartureInfo = async (req, res) => {
   const { heatName } = req.params;
   try {
     const db = await connectDB();
     const result = await db.query(`
-      SELECT
-          h.HEAT_NAME,
-          rht.HEAT_COUNTER,
-          t.TUNDISH_NAME,
-          t.TUNDISH_CAR,
-          ROUND(h.TUND_WEIGHT_AT_OPEN / 1000.0, 1) AS TUND_WEIGHT_AT_OPEN_TON,
-          ROUND(h.TUND_WEIGHT_AT_CLOSE / 1000.0, 1) AS TUND_WEIGHT_AT_CLOSE_TON
-      FROM [CC2PRD].[CCM].[REF_HEAT_TUNDISH] AS rht
-      INNER JOIN [CC2PRD].[CCM].[TUNDISH] AS t
-          ON rht.TD_INSTALLATION_ID = t.TD_INSTALLATION_ID
-      INNER JOIN [CC2PRD].[CCM].[HEAT] AS h
-          ON rht.HEAT_ID = h.HEAT_ID
-      WHERE h.HEAT_NAME = '${heatName}';
+      SELECT 
+        HEAT_NAME,
+        FORMAT([CC2PRD].[CCM].SYSTIME_TO_DISPTIME(OPEN_TIME), 'HH:mm') AS LADLE_OPEN_TIME,
+        FORMAT([CC2PRD].[CCM].SYSTIME_TO_DISPTIME(CLOSE_TIME), 'HH:mm') AS LADLE_CLOSE_TIME,
+        FORMAT([CC2PRD].[CCM].SYSTIME_TO_DISPTIME(DEPART_TIME), 'HH:mm') AS LADLE_DEPART_TIME,
+        ROUND([CC2PRD].[CCM].INTERVAL_TO_SECONDS(OPEN_TIME, CLOSE_TIME) / 60.0, 0) AS POURING_DURATION,
+        ROUND(LADLE_DEPART_WEIGHT / 1000.0, 1) AS LADLE_DEPART_WEIGHT,
+        ROUND((LADLE_ARRIVE_WEIGHT - LADLE_DEPART_WEIGHT) / 1000.0, 1) AS LADLE_OUTPUT_WEIGHT
+      FROM 
+        [CC2PRD].[CCM].HEAT
+      WHERE 
+        HEAT_NAME = '${heatName}';
     `);
     res.json(result.recordset[0]);
   } catch (err) {
@@ -173,25 +173,29 @@ const getLadleDepartureInfo = async (req, res) => {
     res.status(500).send('Lỗi truy vấn dữ liệu phần Tundish');
   }
 };
+
 
 const getTundishMaterialInfo = async (req, res) => {
   const { heatName } = req.params;
   try {
     const db = await connectDB();
     const result = await db.query(`
-      SELECT
-          h.HEAT_NAME,
-          rht.HEAT_COUNTER,
-          t.TUNDISH_NAME,
-          t.TUNDISH_CAR,
-          ROUND(h.TUND_WEIGHT_AT_OPEN / 1000.0, 1) AS TUND_WEIGHT_AT_OPEN_TON,
-          ROUND(h.TUND_WEIGHT_AT_CLOSE / 1000.0, 1) AS TUND_WEIGHT_AT_CLOSE_TON
-      FROM [CC2PRD].[CCM].[REF_HEAT_TUNDISH] AS rht
-      INNER JOIN [CC2PRD].[CCM].[TUNDISH] AS t
-          ON rht.TD_INSTALLATION_ID = t.TD_INSTALLATION_ID
-      INNER JOIN [CC2PRD].[CCM].[HEAT] AS h
-          ON rht.HEAT_ID = h.HEAT_ID
-      WHERE h.HEAT_NAME = '${heatName}';
+      SELECT 
+        MAX(CASE p.POWDER_TYPE WHEN 'TD_SLAG' THEN p.POWDER_NAME END) AS TD_SLAG_NAME,
+        MAX(CASE p.POWDER_TYPE WHEN 'TD_INSUL.' THEN p.POWDER_NAME END) AS TD_INSUL_NAME,
+        t.SPRAY_MATERIAL AS TUND_SPRAY_MATERIAL
+      FROM 
+        [CC2PRD].[CCM].REL_HEAT_POWDER p
+      INNER JOIN 
+        [CC2PRD].[CCM].HEAT h ON p.HEAT_ID = h.HEAT_ID
+      LEFT JOIN 
+        [CC2PRD].[CCM].REF_HEAT_TUNDISH rht ON h.HEAT_ID = rht.HEAT_ID
+      LEFT JOIN 
+        [CC2PRD].[CCM].TUNDISH t ON rht.TD_INSTALLATION_ID = t.TD_INSTALLATION_ID
+      WHERE 
+        h.HEAT_NAME = '${heatName}'
+      GROUP BY 
+        t.SPRAY_MATERIAL;
     `);
     res.json(result.recordset[0]);
   } catch (err) {
@@ -199,7 +203,6 @@ const getTundishMaterialInfo = async (req, res) => {
     res.status(500).send('Lỗi truy vấn dữ liệu phần Tundish');
   }
 };
-
 module.exports = {
   getGeneralInfo,
   getGeneralSectionInfo,
