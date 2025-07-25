@@ -11,6 +11,7 @@ import SteelLossSection from './components/SteelLossSection';
 import OperatorCommentSection from './components/OperatorCommentSection';
 import LadleDepartureSection from './components/LadleDepartureSection';
 import TundishMaterialSection from './components/TundishMaterialSection';
+import TundishTempSporadic from './components/TundishTempSporadic';
 
 function App() {
   const [info, setInfo] = useState(null);
@@ -45,6 +46,7 @@ function App() {
         <div className="column">
           <GeneralSection heatName={heatName} />
           <OperatorCommentSection />
+          <TundishTempSporadic />
         </div>
 
         {/* Cột 2: Ladle + Shroud + Steel Loss */}
