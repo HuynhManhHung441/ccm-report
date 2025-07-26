@@ -203,6 +203,31 @@ const getTundishMaterialInfo = async (req, res) => {
     res.status(500).send('Lỗi truy vấn dữ liệu phần Tundish');
   }
 };
+
+const getTundishTempSporadicInfo = async (req, res) => {
+  const { heatName } = req.params;
+  try {
+    const db = await connectDB();
+    const result = await db.query(`
+      SELECT 
+        [HEAT_NAME],
+        FORMAT([MEASUREMENT_TIME], 'HH:mm') AS MEASUREMENT_TIME,
+        ROUND(([MEASUREMENT_TEMPERATURE] - 273.15), 0) AS MEASUREMENT_TEMPERATURE,
+        ROUND(([LIQUIDUS_TEMPERATURE] - 273.15), 0) AS LIQUIDUS_TEMPERATURE,
+        ROUND(([MEASUREMENT_TEMPERATURE] - [LIQUIDUS_TEMPERATURE]), 0) AS SUPER_HEAT,
+        [ANALYSIS_TYPE]
+      FROM 
+        [CC2PRD].[CCM].[V_REP_TUNDISH_MEASUREMENTS]
+      WHERE 
+        [HEAT_NAME] = '${heatName}'
+        AND [ANALYSIS_TYPE] = 'AIM';
+    `);
+    res.json(result.recordset);
+  } catch (err) {
+    console.error('❌ Lỗi truy vấn Tundish:', err);
+    res.status(500).send('Lỗi truy vấn dữ liệu phần Tundish Temp (Sporadic)');
+  }
+};
 module.exports = {
   getGeneralInfo,
   getGeneralSectionInfo,
@@ -212,5 +237,6 @@ module.exports = {
   getShroudInfo,
   getSteelLossInfo,
   getLadleDepartureInfo,
-  getTundishMaterialInfo
+  getTundishMaterialInfo,
+  getTundishTempSporadicInfo
 };

@@ -11,5 +11,6 @@ router.get('/shroud-section/:heatName', heatController.getShroudInfo);
 router.get('/steel-loss-section/:heatName', heatController.getSteelLossInfo);
 router.get('/ladle-departure-section/:heatName', heatController.getLadleDepartureInfo);
 router.get('/tundish-material-section/:heatName', heatController.getTundishMaterialInfo);
+router.get('/tundish-temp-sporadic/:heatName', heatController.getTundishTempSporadicInfo);
 
 module.exports = router;

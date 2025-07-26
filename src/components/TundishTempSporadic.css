@@ -1,61 +1,52 @@
-/* Bọc toàn bộ section */
-.tundish-temp-section {
-  margin-top: 100px;              /* Đặt cách với đường kẻ xanh dương */
-  border-top: 2px solid #007bff; /* Đường kẻ xanh dương */
+.tundish-temp-sporadic-section {
+  margin-top: 100px;          
   padding-top: 15px;
-  font-size: 14px;
+  font-size: 12px;
   font-family: Arial, sans-serif;
-  color: black;
 }
 
-/* Tiêu đề */
 .tundish-temp-title {
   color: orange;
-  font-weight: bold;
   margin-bottom: 10px;
-  text-transform: uppercase;
+  font-weight: lighter;
 }
 
-/* Bảng */
 .tundish-temp-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13px;
   margin-top: 5px;
 }
 
-/* Header của bảng */
 .tundish-temp-table th {
-  background-color: #f9f9f9;
-  color: black;
-  font-weight: bold;
-  border-bottom: 2px solid #ccc;  /* Kẻ đậm dưới header */
-  padding: 6px 8px;
-  text-align: center;
+  border-bottom: 2px solid #ccc;
+  padding: 6px 1px;
+  font-weight: 400;
+  text-align: left;
 }
 
-/* Các ô dữ liệu */
 .tundish-temp-table td {
-  padding: 6px 8px;
-  text-align: center;
-  border-bottom: 3px solid #ddd; /* Kẻ dưới mỗi dòng */
+  padding: 0px 1px;
+  text-align: left;
+  border-bottom: 3px solid #ddd; 
 }
 
-/* Hàng thứ 3 (dòng dữ liệu thứ 2 sau header) có nền xám nhạt */
-.tundish-temp-table tr:nth-child(3) td {
-  background-color: #565454;
+.tundish-temp-table tr:nth-child(2) td {
+  background-color: #d5d4d4;
 }
 
-/* Căn chỉnh chiều rộng cột */
 .tundish-temp-table th:nth-child(1),
 .tundish-temp-table td:nth-child(1) {
-  width: 80px;
+  width: 120px;
 }
 .tundish-temp-table th:nth-child(2),
 .tundish-temp-table td:nth-child(2),
 .tundish-temp-table th:nth-child(3),
-.tundish-temp-table td:nth-child(3),
+.tundish-temp-table td:nth-child(3){
+  width: 100px;
+  text-align: right;
+}
 .tundish-temp-table th:nth-child(4),
 .tundish-temp-table td:nth-child(4) {
-  width: 100px;
+  width: 200px;
+  text-align: right;
 }

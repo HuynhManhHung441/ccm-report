@@ -12,10 +12,11 @@ import OperatorCommentSection from './components/OperatorCommentSection';
 import LadleDepartureSection from './components/LadleDepartureSection';
 import TundishMaterialSection from './components/TundishMaterialSection';
 import TundishTempSporadic from './components/TundishTempSporadic';
+import TundishTempContinuous from './components/TundishTempContinuous';
 
 function App() {
   const [info, setInfo] = useState(null);
-  const heatName = '25F003335';
+  const heatName = '25F003353';
   useEffect(() => {
     // Gọi API lấy dữ liệu phần Header
     axios.get(`http://localhost:5000/api/heat-report/general-info/${heatName}`)
@@ -46,7 +47,7 @@ function App() {
         <div className="column">
           <GeneralSection heatName={heatName} />
           <OperatorCommentSection />
-          <TundishTempSporadic />
+          <TundishTempSporadic heatName={heatName} />
         </div>
 
         {/* Cột 2: Ladle + Shroud + Steel Loss */}
@@ -54,6 +55,7 @@ function App() {
           <LadleSection heatName={heatName} />
           <ShroudSection heatName={heatName} />
           <SteelLossSection heatName={heatName} />
+          <TundishTempContinuous />
         </div>
 
         {/* Cột 3: Ladle Arrival */}

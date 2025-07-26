@@ -1,57 +1,39 @@
+import './TundishTempSporadic.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './TundishTempSporadic.css';
 
 function TundishTempSporadic({ heatName }) {
-//   const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
 
-//   useEffect(() => {
-//     // Gọi API để lấy dữ liệu Tundish Temp Sporadic cho heatName
-//     axios
-//       .get(`http://localhost:5000/api/heat-report/tundish-temp-sporadic/${heatName}`)
-//       .then((res) => setData(res.data)) // API trả về mảng các bản ghi (time, temp...)
-//       .catch((err) => console.error('Lỗi gọi API Tundish Temp Sporadic:', err));
-//   }, [heatName]);
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/heat-report/tundish-temp-sporadic/${heatName}`)
+      .then(res => setData(res.data))
+      .catch(err => console.error('Lỗi gọi API TUNDISH TEMP SPORADIC:', err));
+  }, [heatName]);
 
-//   if (!data || data.length === 0) {
-//     return (
-//       <div className="tundish-temp-section">
-//         <div className="tundish-temp-title">TUNDISH TEMP (SPORADIC)</div>
-//         <div>Đang tải dữ liệu...</div>
-//       </div>
-//     );
-//   }
+  if (!data) return <div className="section">Đang tải dữ liệu TUNDISH TEMP SPORADIC...</div>;
 
   return (
-    <div className="tundish-temp-section">
-      {/* Tiêu đề */}
-      <div className="tundish-temp-title">TUNDISH TEMP (SPORADIC)</div>
-
-      {/* Bảng dữ liệu */}
+    <div className="tundish-temp-sporadic-section">
+      <div className="section-title">TUNDISH TEMP (SPORADIC)</div>
       <table className="tundish-temp-table">
         <thead>
           <tr>
-            <th>Time</th>
-            <th>Temp <br/>[°C]</th>
-            <th>S.Heat <br/>[°C]</th>
-            <th>Liqu Temp <br/>[°C]</th>
+            <th className="label">Time</th>
+            <th className="label">Temp <br/>[°C]</th>
+            <th className="label">S.Heat <br/>[°C]</th>
+            <th className="label">Liqu Temp <br/>[°C]</th>
           </tr>
         </thead>
         <tbody>
-          
-            <tr>
-              <td>15:26</td>
-              <td>15:26</td>
-              <td>15:26</td>
-              <td>15:26</td>
+          {data.map((row, index) => (
+            <tr key={index}>
+              <td>{row.MEASUREMENT_TIME}</td>
+              <td>{row.MEASUREMENT_TEMPERATURE}</td>
+              <td>{row.SUPER_HEAT}</td>
+              <td>{row.LIQUIDUS_TEMPERATURE}</td>
             </tr>
-            <tr>
-              <td>15:26</td>
-              <td>15:26</td>
-              <td>15:26</td>
-              <td>15:26</td>
-            </tr>
-        
+          ))}
         </tbody>
       </table>
     </div>
