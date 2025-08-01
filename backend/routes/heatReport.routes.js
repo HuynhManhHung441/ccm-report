@@ -12,5 +12,6 @@ router.get('/steel-loss-section/:heatName', heatController.getSteelLossInfo);
 router.get('/ladle-departure-section/:heatName', heatController.getLadleDepartureInfo);
 router.get('/tundish-material-section/:heatName', heatController.getTundishMaterialInfo);
 router.get('/tundish-temp-sporadic/:heatName', heatController.getTundishTempSporadicInfo);
+router.get('/strand-data-section/:heatName', heatController.getStrandDataInfo);
 
 module.exports = router;

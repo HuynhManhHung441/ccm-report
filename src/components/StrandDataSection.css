@@ -26,7 +26,6 @@
   line-height: 1.2;
 }
 
-/* Nền xen kẽ */
 .strand-data-table tbody tr:nth-child(odd) {
   background-color: #f5f5f5;
 }

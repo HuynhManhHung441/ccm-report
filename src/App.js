@@ -17,7 +17,7 @@ import StrandDataSection from './components/StrandDataSection';
 
 function App() {
   const [info, setInfo] = useState(null);
-  const heatName = '25F003335';
+  const heatName = '25F003353';
   useEffect(() => {
     // Gọi API lấy dữ liệu phần Header
     axios.get(`http://localhost:5000/api/heat-report/general-info/${heatName}`)
@@ -71,7 +71,7 @@ function App() {
           <TundishMaterialSection heatName={heatName} />
         </div>
       </div>
-      <StrandDataSection />
+      <StrandDataSection heatName={heatName} />
     </div>
   );
 }

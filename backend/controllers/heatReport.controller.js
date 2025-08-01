@@ -228,6 +228,51 @@ const getTundishTempSporadicInfo = async (req, res) => {
     res.status(500).send('Lỗi truy vấn dữ liệu phần Tundish Temp (Sporadic)');
   }
 };
+
+const getStrandDataInfo = async (req, res) => {
+  const { heatName } = req.params;
+  try {
+    const db = await connectDB();
+
+    // Bảng 1: Powder, SEN, Strand Length, Cast
+    const strandMoldData = await db.query(`
+      SELECT 
+        h.HEAT_ID,
+        h.HEAT_NAME,
+        hs.STRAND_NAME,
+        hs.MOLD_NAME
+      FROM [CC2PRD].[CCM].[V_REP_HEAT] AS h
+      INNER JOIN [CC2PRD].[CCM].[V_REP_HEAT_STRAND] AS hs ON h.HEAT_ID = hs.HEAT_ID
+      WHERE [HEAT_NAME] = '${heatName}'
+    `);
+
+    // Bảng 2: Practices
+    const formatData = await db.query(`
+      SELECT 
+        h.HEAT_NAME,
+        m.THICKNESS,
+        m.WIDTH_BOTTOM,
+        CAST(CAST(ROUND(m.THICKNESS * 1000.0, 0) AS INT) AS VARCHAR) 
+        + ' x ' + 
+        CAST(CAST(ROUND(m.WIDTH_BOTTOM * 1000.0, 0) AS INT) AS VARCHAR) AS FORMAT
+      FROM 
+        [CC2PRD].[CCM].[MOLD_FORMAT_LOG] AS m
+      INNER JOIN 
+        [CC2PRD].[CCM].[V_REP_HEAT] AS h ON m.HEAT_ID = h.HEAT_ID
+      WHERE [HEAT_NAME] = '${heatName}'
+    `);
+
+    res.json({
+      strandMold: strandMoldData.recordset,
+      format: formatData.recordset
+    });
+  } catch (err) {
+    console.error('❌ Lỗi truy vấn STRAND DATA:', err);
+    res.status(500).send('Lỗi truy vấn dữ liệu phần Strand Data');
+  }
+};
+
+
 module.exports = {
   getGeneralInfo,
   getGeneralSectionInfo,
@@ -238,5 +283,6 @@ module.exports = {
   getSteelLossInfo,
   getLadleDepartureInfo,
   getTundishMaterialInfo,
-  getTundishTempSporadicInfo
+  getTundishTempSporadicInfo,
+  getStrandDataInfo
 };
