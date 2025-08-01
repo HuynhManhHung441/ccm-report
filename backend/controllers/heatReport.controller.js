@@ -233,41 +233,29 @@ const getStrandDataInfo = async (req, res) => {
   const { heatName } = req.params;
   try {
     const db = await connectDB();
-
-    // Bảng 1: Powder, SEN, Strand Length, Cast
-    const strandMoldData = await db.query(`
+    const result = await db.query(`
       SELECT 
         h.HEAT_ID,
         h.HEAT_NAME,
         hs.STRAND_NAME,
-        hs.MOLD_NAME
-      FROM [CC2PRD].[CCM].[V_REP_HEAT] AS h
-      INNER JOIN [CC2PRD].[CCM].[V_REP_HEAT_STRAND] AS hs ON h.HEAT_ID = hs.HEAT_ID
-      WHERE [HEAT_NAME] = '${heatName}'
-    `);
-
-    // Bảng 2: Practices
-    const formatData = await db.query(`
-      SELECT 
-        h.HEAT_NAME,
+        hs.MOLD_NAME,
         m.THICKNESS,
         m.WIDTH_BOTTOM,
         CAST(CAST(ROUND(m.THICKNESS * 1000.0, 0) AS INT) AS VARCHAR) 
-        + ' x ' + 
+            + ' x ' + 
         CAST(CAST(ROUND(m.WIDTH_BOTTOM * 1000.0, 0) AS INT) AS VARCHAR) AS FORMAT
       FROM 
-        [CC2PRD].[CCM].[MOLD_FORMAT_LOG] AS m
+        [CC2PRD].[CCM].[V_REP_HEAT] AS h
       INNER JOIN 
-        [CC2PRD].[CCM].[V_REP_HEAT] AS h ON m.HEAT_ID = h.HEAT_ID
-      WHERE [HEAT_NAME] = '${heatName}'
+        [CC2PRD].[CCM].[V_REP_HEAT_STRAND] AS hs ON h.HEAT_ID = hs.HEAT_ID
+      INNER JOIN 
+        [CC2PRD].[CCM].[MOLD_FORMAT_LOG] AS m ON h.HEAT_ID = m.HEAT_ID
+      WHERE 
+        h.HEAT_NAME = '${heatName}';
     `);
-
-    res.json({
-      strandMold: strandMoldData.recordset,
-      format: formatData.recordset
-    });
+    res.json(result.recordset);
   } catch (err) {
-    console.error('❌ Lỗi truy vấn STRAND DATA:', err);
+    console.error('❌ Lỗi truy vấn Strand Data:', err);
     res.status(500).send('Lỗi truy vấn dữ liệu phần Strand Data');
   }
 };

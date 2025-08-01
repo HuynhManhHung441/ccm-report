@@ -2,22 +2,17 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './StrandDataSection.css';
 function StrandData({ heatName }) {
-  const [strandData1, setStrandData1] = useState([]);
-  const [strandData2, setStrandData2] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/heat-report/strand-data-section/${heatName}`)
-      .then(res => {
-        setStrandData1(res.data.strandMold);
-        setStrandData2(res.data.format);
-      })
-      .catch(err => console.error(err));
+      .then(res => setData(res.data))
+      .catch(err => console.error('Lỗi gọi STRAND DATA:', err));
   }, [heatName]);
 
   return (
     <div className="strand-data-section">
       <div className="section-title">STRAND DATA</div>
-      {/* Bảng 1: Powder, SEN, Strand Length, Cast */}
       <table className="strand-data-table">
         <colgroup>
           <col className="col-strand" />
@@ -59,12 +54,13 @@ function StrandData({ heatName }) {
         </thead>
 
         <tbody>
-          {strandData1.map((row, index) => (
-            <React.Fragment key={index}>
+          {data
+            .filter((_, index) => index === 0 || index === 6)
+            .map((row, index) => (
               <tr key={index}>
                 <td>{row.STRAND_NAME}</td>
                 <td>{row.MOLD_NAME}</td>
-                <td>{strandData2[0]?.FORMAT}</td>
+                <td>{row.FORMAT}</td>
                 <td>WS P-10N</td>
                 <td>0.0</td>
                 <td>2 Hole (15° down)</td>
@@ -76,12 +72,10 @@ function StrandData({ heatName }) {
                 <td>45</td>
                 <td>1.20</td>
               </tr>
-            </React.Fragment>
           ))}
         </tbody>
       </table>
 
-      {/* Bảng 2: Practices */}
       <table className="strand-data-table">
         <colgroup>
           <col className="col-strand" />
@@ -109,18 +103,18 @@ function StrandData({ heatName }) {
         </thead>
 
         <tbody>
-          {strandData1.map((row, index) => (
-            <React.Fragment key={index}>
+          {data
+            .filter((_, index) => index === 0 || index === 6)
+            .map((row, index) => (
               <tr>
                 <td>{row.STRAND_NAME}</td>
                 <td>{row.MOLD_NAME}</td>
-                <td>{strandData2[0]?.FORMAT}</td>
+                <td>{row.FORMAT}</td>
                 <td>MedC_Hard</td>
                 <td>Table 1</td>
                 <td>230_MedC</td>
                 <td>Anti bulging</td>
               </tr>
-            </React.Fragment>
           ))}
         </tbody>
       </table>
