@@ -234,7 +234,7 @@ const getStrandDataInfo = async (req, res) => {
   try {
     const db = await connectDB();
     const result = await db.query(`
-      SELECT 
+      SELECT DISTINCT
         h.HEAT_ID,
         h.HEAT_NAME,
         hs.STRAND_NAME,
@@ -243,13 +243,21 @@ const getStrandDataInfo = async (req, res) => {
         m.WIDTH_BOTTOM,
         CAST(CAST(ROUND(m.THICKNESS * 1000.0, 0) AS INT) AS VARCHAR) 
             + ' x ' + 
-        CAST(CAST(ROUND(m.WIDTH_BOTTOM * 1000.0, 0) AS INT) AS VARCHAR) AS FORMAT
+        CAST(CAST(ROUND(m.WIDTH_BOTTOM * 1000.0, 0) AS INT) AS VARCHAR) AS FORMAT,
+        p.CASTING_POWDER_NAME,
+        p.CASTING_POWDER_AMOUNT,
+        s.SEN_TYPE,
+        s.SEN_HEAT_COUNTER
       FROM 
         [CC2PRD].[CCM].[V_REP_HEAT] AS h
       INNER JOIN 
         [CC2PRD].[CCM].[V_REP_HEAT_STRAND] AS hs ON h.HEAT_ID = hs.HEAT_ID
       INNER JOIN 
         [CC2PRD].[CCM].[MOLD_FORMAT_LOG] AS m ON h.HEAT_ID = m.HEAT_ID
+      INNER JOIN 
+        [CC2PRD].[CCM].[V_REP_MOLD_POWDER_STRAND] AS p ON h.HEAT_ID = p.HEAT_ID
+      INNER JOIN 
+        [CC2PRD].[CCM].[V_REP_SEN_STRAND] AS s ON h.HEAT_ID = s.HEAT_ID
       WHERE 
         h.HEAT_NAME = '${heatName}';
     `);

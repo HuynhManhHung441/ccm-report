@@ -6,10 +6,12 @@ function StrandData({ heatName }) {
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/heat-report/strand-data-section/${heatName}`)
-      .then(res => setData(res.data))
+      .then(res => {
+        console.log('✅ RESPONSE DATA:', res.data);
+        setData(res.data)})
       .catch(err => console.error('Lỗi gọi STRAND DATA:', err));
   }, [heatName]);
-
+  
   return (
     <div className="strand-data-section">
       <div className="section-title">STRAND DATA</div>
@@ -54,17 +56,15 @@ function StrandData({ heatName }) {
         </thead>
 
         <tbody>
-          {data
-            .filter((_, index) => index === 0 || index === 6)
-            .map((row, index) => (
+          {data.map((row, index) => (
               <tr key={index}>
                 <td>{row.STRAND_NAME}</td>
                 <td>{row.MOLD_NAME}</td>
                 <td>{row.FORMAT}</td>
-                <td>WS P-10N</td>
-                <td>0.0</td>
-                <td>2 Hole (15° down)</td>
-                <td>4</td>
+                <td>{row.CASTING_POWDER_NAME}</td>
+                <td>{row.CASTING_POWDER_AMOUNT}</td>
+                <td>{row.SEN_TYPE}</td>
+                <td>{row.SEN_HEAT_COUNTER}</td>
                 <td>157.88</td>
                 <td>212.36</td>
                 <td>15:43</td>
@@ -103,9 +103,7 @@ function StrandData({ heatName }) {
         </thead>
 
         <tbody>
-          {data
-            .filter((_, index) => index === 0 || index === 6)
-            .map((row, index) => (
+          {data.map((row, index) => (
               <tr>
                 <td>{row.STRAND_NAME}</td>
                 <td>{row.MOLD_NAME}</td>
