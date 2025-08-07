@@ -8,7 +8,7 @@ function StrandData({ heatName }) {
     axios.get(`http://localhost:5000/api/heat-report/strand-data-section/${heatName}`)
       .then(res => {
         console.log('✅ RESPONSE DATA:', res.data);
-        setData(res.data)})
+        setData(res.data)})   
       .catch(err => console.error('Lỗi gọi STRAND DATA:', err));
   }, [heatName]);
   
@@ -33,25 +33,25 @@ function StrandData({ heatName }) {
         </colgroup>
         <thead>
           <tr>
-            <th rowSpan="2">Strand</th>
-            <th rowSpan="2">Mold</th>
-            <th rowSpan="2">Format [mm]</th>
-            <th colSpan="2">Powder</th>
-            <th colSpan="2">SEN</th>
-            <th colSpan="2">Strand Length [m]</th>
-            <th colSpan="4">Cast</th>
+            <th rowSpan="2" className="label">Strand</th>
+            <th rowSpan="2" className="label">Mold</th>
+            <th rowSpan="2" className="label">Format [mm]</th>
+            <th colSpan="2" className="label">Powder</th>
+            <th colSpan="2" className="label">SEN</th>
+            <th colSpan="2" className="label">Strand Length [m]</th>
+            <th colSpan="4" className="label">Cast</th>
           </tr>
           <tr>
-            <th>Type</th>
-            <th>Amount [kg]</th>
-            <th>Type</th>
-            <th>Counter</th>
-            <th>Start</th>
-            <th>End</th>
-            <th>Start</th>
-            <th>End</th>
-            <th>Dur. [min]</th>
-            <th>Avg speed [m/min]</th>
+            <th className="label">Type</th>
+            <th className="label">Amount [kg]</th>
+            <th className="label">Type</th>
+            <th className="label">Counter</th>
+            <th className="label">Start</th>
+            <th className="label">End</th>
+            <th className="label">Start</th>
+            <th className="label">End</th>
+            <th className="label">Dur. [min]</th>
+            <th className="label">Avg speed [m/min]</th>
           </tr>
         </thead>
 
@@ -89,16 +89,16 @@ function StrandData({ heatName }) {
 
         <thead>
           <tr>
-            <th rowSpan="2">Strand</th>
-            <th rowSpan="2">Mold</th>
-            <th rowSpan="2">Format [mm]</th>
-            <th colSpan="4">Practices</th>
+            <th rowSpan="2" className="label">Strand</th>
+            <th rowSpan="2" className="label">Mold</th>
+            <th rowSpan="2" className="label">Format [mm]</th>
+            <th colSpan="4" className="label">Practices</th>
           </tr>
           <tr>
-            <th>Cooling</th>
-            <th>Osci</th>
-            <th>Gap</th>
-            <th>Mold Level Control</th>
+            <th className="label">Cooling</th>
+            <th className="label">Osci</th>
+            <th className="label">Gap</th>
+            <th className="label">Mold Level Control</th>
           </tr>
         </thead>
 

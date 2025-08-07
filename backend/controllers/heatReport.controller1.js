@@ -253,12 +253,12 @@ const getStrandDataInfo = async (req, res) => {
       INNER JOIN 
         [CC2PRD].[CCM].[V_REP_HEAT_STRAND] AS hs ON h.HEAT_ID = hs.HEAT_ID
       INNER JOIN 
-        [CC2PRD].[CCM].[MOLD_FORMAT_LOG] AS m ON h.HEAT_ID = m.HEAT_ID AND hs.STRAND_NUMBER = m.STRAND_NUMBER
+        [CC2PRD].[CCM].[MOLD_FORMAT_LOG] AS m ON h.HEAT_ID = m.HEAT_ID
       INNER JOIN 
-        [CC2PRD].[CCM].[V_REP_MOLD_POWDER_STRAND] AS p ON h.HEAT_ID = p.HEAT_ID AND hs.STRAND_NUMBER = p.STRAND_NUMBER
+        [CC2PRD].[CCM].[V_REP_MOLD_POWDER_STRAND] AS p ON h.HEAT_ID = p.HEAT_ID
       INNER JOIN 
-        [CC2PRD].[CCM].[V_REP_SEN_STRAND] AS s ON h.HEAT_ID = s.HEAT_ID AND hs.STRAND_NUMBER = s.STRAND_NUMBER
-      WHERE
+        [CC2PRD].[CCM].[V_REP_SEN_STRAND] AS s ON h.HEAT_ID = s.HEAT_ID
+      WHERE 
         h.HEAT_NAME = '${heatName}';
     `);
     res.json(result.recordset);
