@@ -65,12 +65,12 @@ function StrandData({ heatName }) {
                 <td>{row.CASTING_POWDER_AMOUNT}</td>
                 <td>{row.SEN_TYPE}</td>
                 <td>{row.SEN_HEAT_COUNTER}</td>
-                <td>157.88</td>
-                <td>212.36</td>
-                <td>15:43</td>
-                <td>16:28</td>
-                <td>45</td>
-                <td>1.20</td>
+                <td>{row.MOLD_START_LENGTH}</td>
+                <td>{row.MOLD_END_LENGTH}</td>
+                <td>{row.MOLD_START_TIME}</td>
+                <td>{row.MOLD_END_TIME}</td>
+                <td>{row.DURATION}</td>
+                <td>{row.AVG_SPEED}</td>
               </tr>
           ))}
         </tbody>
@@ -108,10 +108,10 @@ function StrandData({ heatName }) {
                 <td>{row.STRAND_NAME}</td>
                 <td>{row.MOLD_NAME}</td>
                 <td>{row.FORMAT}</td>
-                <td>MedC_Hard</td>
-                <td>Table 1</td>
-                <td>230_MedC</td>
-                <td>Anti bulging</td>
+                <td>{row.L2_COOLING_PRACTICE}</td>
+                <td>{row.OSCI_PRACTICE}</td>
+                <td>{row.DYNAGAP_PRACTICE}</td>
+                <td>{row.MLC_PRACTICE}</td>
               </tr>
           ))}
         </tbody>
