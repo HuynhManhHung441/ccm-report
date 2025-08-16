@@ -1,57 +1,37 @@
 .analysis-section {
-  margin: 24px 0;
+  margin-top: 40px;
   width: 100%;
-  box-sizing: border-box;
+  font-size: 12px;
 }
-
-.section-title {
-  color: #e86c1a;
-  font-weight: 500;
-  margin-bottom: 4px;
-  font-size: 18px;
-  letter-spacing: 0.5px;
-}
-
 .table-scroll {
   width: 100%;
   overflow-x: visible;
   box-sizing: border-box;
 }
-
 .analysis-table {
   border-collapse: collapse;
   width: 100%;
   table-layout: auto;
   background: #fff;
-  font-size: 13px;
+  font-size: 12px;
 }
-
 .analysis-table th, .analysis-table td {
   border: 1px solid #ccc;
-  padding: 3px 8px;
+  padding: 3px 3px;
   text-align: center;
-  /* Không dùng min-width lớn, không dùng white-space: nowrap */
   box-sizing: border-box;
 }
-
 .analysis-table th {
-  background: #f5f5f5;
-  font-weight: 600;
+  font-weight: 300;
 }
-
-.analysis-table tr:nth-child(1) td,
 .analysis-table tr:nth-child(2) td,
-.analysis-table tr:nth-child(3) td {
-  background: #f7f7f7;
+.analysis-table tr:nth-child(4) td,
+.analysis-table tr:nth-child(6) td,
+.analysis-table tr:nth-child(8) td,
+.analysis-table tr:nth-child(10) td {
+  background-color: #d5d4d4;
   font-weight: 500;
 }
-
-.cell-out {
-  background: #f55b5b !important;
-  color: #fff;
-  font-weight: 600;
-}
-
 .analysis-table tr td:first-child {
   font-weight: 500;
   background: #f7f7f7;
