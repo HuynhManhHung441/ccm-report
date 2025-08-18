@@ -73,7 +73,7 @@ function App() {
         </div>
       </div>
       <StrandDataSection heatName={heatName} />
-      <AnalysisDataSection />
+      <AnalysisDataSection heatName={heatName} />
     </div>
   );
 }
