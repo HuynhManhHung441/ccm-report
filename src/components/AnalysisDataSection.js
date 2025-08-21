@@ -14,22 +14,12 @@ export default function AnalysisDataSection({ heatName }) {
   const [data, setData] = useState([]);
   const [columns, setColumns] = useState([]);
 
-//   const handleDownload = () => {
-//     const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
-//     const url = URL.createObjectURL(blob);
-//     const a = document.createElement('a');
-//     a.href = url;
-//     a.download = `analysis-data-${heatName}.json`;
-//     a.click();
-//     URL.revokeObjectURL(url);
-//   };
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/heat-report/analysis-data-section/${heatName}`)
       .then(res => {
         setData(res.data);
         if (res.data && res.data.length > 0) {
-          // Lấy tất cả key, loại bỏ HEAT_NAME nếu có
           const keys = Object.keys(res.data[0]).filter(k => k !== 'HEAT_NAME');
           setColumns(keys);
         }
@@ -41,7 +31,6 @@ export default function AnalysisDataSection({ heatName }) {
     <div className="analysis-section">
       <div className="section-title">
         ANALYSIS DATA
-        {/* <button style={{float: 'right', fontSize: 12}} onClick={handleDownload}>Tải JSON</button> */}
       </div>
       <div className="table-scroll">
         <table className="analysis-table">

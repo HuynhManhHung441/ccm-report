@@ -1,0 +1,25 @@
+.slab-section {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.slab-table {
+  width: 100%;
+  border-collapse: collapse;
+  /* font-size: 14px; */
+}
+
+.slab-table th,
+.slab-table td {
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.slab-table thead th {
+  background-color: #f9f9f9;
+  font-weight: 300
+}
