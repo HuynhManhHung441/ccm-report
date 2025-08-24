@@ -311,6 +311,45 @@ const getAnalysisDataInfo = async (req, res) => {
   }
 };
 
+const getSlabDataInfo = async (req, res) => {
+  const { heatName } = req.params;
+  try {
+    const db = await connectDB();
+    const result = await db.query(`
+      SELECT 
+        p.HEAT_ID,
+        h.HEAT_NAME,
+        p.STRAND_NUMBER + 2 AS STRAND_NUMBER,
+        p.MARKING_NUMBER,
+        p.PRODUCT_NAME,
+        CAST(p.ACTUAL_LENGTH_COLD*1000 AS DECIMAL(10,0)) AS ACTUAL_LENGTH_COLD,
+        CAST(p.LENGTH_AIM*1000 AS DECIMAL(10,0)) AS LENGTH_AIM,
+        CAST(p.LENGTH_MIN*1000 AS DECIMAL(10,0)) AS LENGTH_MIN,
+        CAST(p.LENGTH_MAX*1000 AS DECIMAL(10,0)) AS LENGTH_MAX,
+        CAST(p.WIDTH_FRONT_COLD*1000 AS DECIMAL(10,0)) AS WIDTH_FRONT_COLD,
+        CAST(p.WIDTH_BACK_COLD*1000 AS DECIMAL(10,0)) AS WIDTH_BACK_COLD,
+        CAST(p.THICKNESS_COLD*1000 AS DECIMAL(10,0)) AS THICKNESS_COLD,
+        CAST(p.WEIGHT_CALCULATED/1000 AS DECIMAL(10,2)) AS WEIGHT_CALCULATED,
+        CAST(p.WEIGHT_MEASURED/1000 AS DECIMAL(10,2)) AS WEIGHT_MEASURED,
+        FORMAT(p.CUTTING_TIME, 'HH:mm') AS CUTTING_TIME,
+        p.CUTTING_MODE,
+        p.SAMPLE_CUT,
+        p.QUALITY_RESULT_SURFACE,
+        p.QUALITY_RESULT_INTERN,
+        p.SLAB_DESTINATION
+      FROM [CC2PRD].[CCM].[V_REP_PRODUCTS] AS p
+      INNER JOIN [CC2PRD].[CCM].[V_REP_HEAT] AS h 
+        ON p.HEAT_ID = h.HEAT_ID
+      WHERE
+        HEAT_NAME = '${heatName}';
+    `);
+    res.json(result.recordset);
+  } catch (err) {
+    console.error('❌ Lỗi truy vấn Slab Data:', err);
+    res.status(500).send('Lỗi truy vấn dữ liệu phần Slab Data');
+  }
+};
+
 module.exports = {
   getGeneralInfo,
   getGeneralSectionInfo,
@@ -323,5 +362,6 @@ module.exports = {
   getTundishMaterialInfo,
   getTundishTempSporadicInfo,
   getStrandDataInfo,
-  getAnalysisDataInfo
+  getAnalysisDataInfo,
+  getSlabDataInfo
 };

@@ -1,9 +1,8 @@
-// src/components/SlabDataSection.js
 import React from "react";
 import "./SlabDataSection.css";
 
 export default function SlabDataSection() {
-  const dummyData = [
+  const SlabDataList = [
     {
       strand: 3,
       no: 1,
@@ -26,12 +25,12 @@ export default function SlabDataSection() {
     },
     {
       strand: 3,
-      no: 1,
+      no: 2,
       markingNo: "25F00335302",
       lengthAct: 7812,
       lengthAim: 7800,
       lengthMin: 7710,
-      lengthMax: 7800,
+      lengthMax: 7820,
       widthFront: 1550,
       widthBack: 1550,
       thick: 230,
@@ -46,7 +45,7 @@ export default function SlabDataSection() {
     },
     {
       strand: 3,
-      no: 1,
+      no: 3,
       markingNo: "25F00335401",
       lengthAct: 7812,
       lengthAim: 7800,
@@ -66,8 +65,8 @@ export default function SlabDataSection() {
     },
     {
       strand: 3,
-      no: 1,
-      markingNo: "25F00335305",
+      no: 4,
+      markingNo: "25F00335335",
       lengthAct: 7812,
       lengthAim: 7800,
       lengthMin: 7710,
@@ -86,47 +85,7 @@ export default function SlabDataSection() {
     },
     {
       strand: 3,
-      no: 1,
-      markingNo: "25F00336301",
-      lengthAct: 7812,
-      lengthAim: 7800,
-      lengthMin: 7710,
-      lengthMax: 7800,
-      widthFront: 1550,
-      widthBack: 1550,
-      thick: 230,
-      weightCalc: 21.84,
-      weightAct: 21.82,
-      time: "16:31",
-      cutMode: "L2",
-      sample: "N",
-      qeInt: "❌",
-      qeSurf: "✅",
-      destination: "-",
-    },
-    {
-      strand: 3,
-      no: 1,
-      markingNo: "25F00835301",
-      lengthAct: 7812,
-      lengthAim: 7800,
-      lengthMin: 7710,
-      lengthMax: 7800,
-      widthFront: 1550,
-      widthBack: 1550,
-      thick: 230,
-      weightCalc: 21.84,
-      weightAct: 21.82,
-      time: "16:31",
-      cutMode: "L2",
-      sample: "N",
-      qeInt: "❌",
-      qeSurf: "✅",
-      destination: "-",
-    },
-    {
-      strand: 3,
-      no: 1,
+      no: 5,
       markingNo: "25F00336401",
       lengthAct: 7812,
       lengthAim: 7800,
@@ -147,7 +106,7 @@ export default function SlabDataSection() {
     {
       strand: 3,
       no: 1,
-      markingNo: "25F00375301",
+      markingNo: "25F00833531",
       lengthAct: 7812,
       lengthAim: 7800,
       lengthMin: 7710,
@@ -167,9 +126,49 @@ export default function SlabDataSection() {
     {
       strand: 3,
       no: 2,
+      markingNo: "25F00396401",
+      lengthAct: 7812,
+      lengthAim: 7800,
+      lengthMin: 7710,
+      lengthMax: 7800,
+      widthFront: 1550,
+      widthBack: 1550,
+      thick: 230,
+      weightCalc: 21.84,
+      weightAct: 21.82,
+      time: "16:31",
+      cutMode: "L2",
+      sample: "N",
+      qeInt: "❌",
+      qeSurf: "✅",
+      destination: "-",
+    },
+    {
+      strand: 3,
+      no: 3,
+      markingNo: "25F00378301",
+      lengthAct: 7812,
+      lengthAim: 7800,
+      lengthMin: 7710,
+      lengthMax: 7840,
+      widthFront: 1550,
+      widthBack: 1550,
+      thick: 230,
+      weightCalc: 21.84,
+      weightAct: 21.82,
+      time: "16:31",
+      cutMode: "L2",
+      sample: "N",
+      qeInt: "❌",
+      qeSurf: "✅",
+      destination: "-",
+    },
+    {
+      strand: 3,
+      no: 4,
       markingNo: "25F00335312",
       lengthAct: 7800,
-      lengthAim: 7800,
+      lengthAim: 7820,
       lengthMin: 7710,
       lengthMax: 7800,
       widthFront: 1550,
@@ -186,9 +185,9 @@ export default function SlabDataSection() {
     },
   ];
 
-  const totalWeightCalc = dummyData.reduce((sum, row) => sum + row.weightCalc, 0);
-  const totalWeightAct = dummyData.reduce((sum, row) => sum + row.weightAct, 0);
-  const totalLengthAct = dummyData.reduce((sum, row) => sum + row.lengthAct, 0);
+  const totalWeightCalc = SlabDataList.reduce((sum, row) => sum + row.weightCalc, 0);
+  const totalWeightAct = SlabDataList.reduce((sum, row) => sum + row.weightAct, 0);
+  const totalLengthAct = SlabDataList.reduce((sum, row) => sum + row.lengthAct, 0);
 
   return (
     <section className="slab-section">
@@ -218,7 +217,7 @@ export default function SlabDataSection() {
             </tr>
           </thead>
           <tbody>
-            {dummyData.map((row, idx) => (
+            {SlabDataList.map((row, idx) => (
               <tr key={idx}>
                 <td>{row.strand}</td>
                 <td>{row.no}</td>
@@ -244,7 +243,7 @@ export default function SlabDataSection() {
           <tfoot>
             <tr>
               <td colSpan="1"></td>
-              <td colSpan="1">{dummyData.length} Slabs</td>
+              <td colSpan="1">{SlabDataList.length} Slabs</td>
               <td colSpan="1"></td>
               <td colSpan="1">{totalLengthAct.toFixed(2)}</td>
               <td colSpan="6"></td>
