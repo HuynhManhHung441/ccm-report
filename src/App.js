@@ -16,6 +16,7 @@ import TundishTempContinuous from './components/TundishTempContinuous';
 import StrandDataSection from './components/StrandDataSection';
 import AnalysisDataSection from './components/AnalysisDataSection';
 import SlabData from './components/SlabData';
+import SlabSectionData from './components/SlabSectionData';
 
 function App() {
   const [info, setInfo] = useState(null);
@@ -76,6 +77,7 @@ function App() {
       <StrandDataSection heatName={heatName} />
       <AnalysisDataSection heatName={heatName} />
       <SlabData heatName={heatName} />
+      <SlabSectionData heatName={heatName} />
     </div>
   );
 }

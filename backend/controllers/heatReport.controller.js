@@ -350,6 +350,33 @@ const getSlabDataInfo = async (req, res) => {
   }
 };
 
+
+const getSlabSectionDataInfo = async (req, res) => {
+  const { heatName } = req.params;
+  try {
+    const db = await connectDB();
+    const result = await db.query(`
+      SELECT 
+        s.HEAT_ID,
+        h.HEAT_NAME,
+        (s.STRAND_NUMBER + 2) AS STRAND_NUMBER,
+        s.PRODUCT_NAME,
+        s.ENTRY_TYPE,
+        s.START_POSITION,
+        s.SECTION_LENGTH
+      FROM [CC2PRD].[CCM].[V_REP_PRODUCTS_SECTIONS] AS s
+      INNER JOIN [CC2PRD].[CCM].[V_REP_HEAT] AS h
+        ON s.HEAT_ID = h.HEAT_ID
+      WHERE
+        HEAT_NAME = '${heatName}';
+    `);
+    res.json(result.recordset);
+  } catch (err) {
+    console.error('❌ Lỗi truy vấn Slab Section Data:', err);
+    res.status(500).send('Lỗi truy vấn dữ liệu phần Slab Section Data');
+  }
+};
+
 module.exports = {
   getGeneralInfo,
   getGeneralSectionInfo,
@@ -363,5 +390,6 @@ module.exports = {
   getTundishTempSporadicInfo,
   getStrandDataInfo,
   getAnalysisDataInfo,
-  getSlabDataInfo
+  getSlabDataInfo,
+  getSlabSectionDataInfo
 };
