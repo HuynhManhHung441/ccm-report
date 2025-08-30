@@ -2,19 +2,28 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './AnalysisDataSection.css';
 
+// function formatValue(val) {
+//   if (val === null || val === undefined || val === '') return '';
+//   if (typeof val === 'number') {
+//     return Number(val).toFixed(4);
+//   }
+//   return val;
+// }
+
 function formatValue(val) {
   if (val === null || val === undefined || val === '') return '';
   if (typeof val === 'number') {
     return Number(val).toFixed(4);
   }
-  return val;
+  const parsed = parseFloat(val);
+  return isNaN(parsed) ? val : parsed.toFixed(4);
 }
 
 
 export default function AnalysisDataSection({ heatName }) {
   const [data, setData] = useState([]);
   const [columns, setColumns] = useState([]);
-
+// thêm min, max  
   const [minValues, setMinValues] = useState({});
   const [maxValues, setMaxValues] = useState({});
 
@@ -32,22 +41,22 @@ export default function AnalysisDataSection({ heatName }) {
         const minObj = {};
         const maxObj = {};
 
-        if (minRow) {
-          keys.forEach(k => {
-            const val = parseFloat(minRow[k]);
-            if (!isNaN(val)) minObj[k] = val;
-          });
-        }
+          if (minRow) {
+            keys.forEach(k => {
+              const val = parseFloat(minRow[k]);
+              if (!isNaN(val)) minObj[k] = val;
+            });
+          }
 
-        if (maxRow) {
-          keys.forEach(k => {
-            const val = parseFloat(maxRow[k]);
-            if (!isNaN(val)) maxObj[k] = val;
-          });
-        }
+          if (maxRow) {
+            keys.forEach(k => {
+              const val = parseFloat(maxRow[k]);
+              if (!isNaN(val)) maxObj[k] = val;
+            });
+          }
 
-        setMinValues(minObj);
-        setMaxValues(maxObj);
+          setMinValues(minObj);
+          setMaxValues(maxObj);
         
         }
       })

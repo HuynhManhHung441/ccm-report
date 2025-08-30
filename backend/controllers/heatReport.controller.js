@@ -350,7 +350,6 @@ const getSlabDataInfo = async (req, res) => {
   }
 };
 
-
 const getSlabSectionDataInfo = async (req, res) => {
   const { heatName } = req.params;
   try {
