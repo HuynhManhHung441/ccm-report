@@ -20,10 +20,34 @@ import SlabData from './components/SlabData';
 import SlabSectionData from './components/SlabSectionData';
 
 function App() {
+  // const [info, setInfo] = useState(null);
   const heatName = '25F003353';
+  // useEffect(() => {
+    
+  //   axios.get(`http://localhost:5000/api/heat-report/general-info/${heatName}`)
+  //     .then(res => setInfo(res.data))
+  //     .catch(err => console.error('❌ Lỗi gọi API:', err));
+  // }, [heatName]);
+
+  // if (!info) return <div>Đang tải dữ liệu...</div>;
   return (
     <div className="container">
+      {/* Header */}
+      {/* <div className="header">
+        <h1 className="heat-title">HEAT REPORT CCM2-HRC2</h1>
+        <img src="/assets/images/LogoGangThepBlue.png" alt="Hòa Phát Logo" className="logo" />
+      </div>
+
+      <div className="info-grid">
+        <div><span className="label">Heat:</span> <span className="value">{info.HEAT_NAME}</span></div>
+        <div><span className="label">Prod. Date:</span> <span className="value">{info.LADLE_OPEN_TIME}</span></div>
+        <div><span className="label">Plan:</span> <span className="value">{info.PLAN_NAME}</span></div>
+        <div><span className="label">Steel Grade:</span> <span className="value">{info.STEEL_GRADE}</span></div>
+        <div><span className="label">Shift:</span> <span className="value">{info.SHIFT_TEAM_NAME}</span></div>
+        <div><span className="label">Foreman:</span> <span className="value"></span></div>
+      </div> */}
       <HeatReportHeader heatName={heatName} />
+
       <div className="section-row">
         {/* Cột 1: General + Operator Comment */}
         <div className="column">
