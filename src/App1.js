@@ -18,7 +18,6 @@ import StrandDataSection from './components/StrandDataSection';
 import AnalysisDataSection from './components/AnalysisDataSection';
 import SlabData from './components/SlabData';
 import SlabSectionData from './components/SlabSectionData';
-import Header from "./components/Header";
 
 function App() {
   const [heatName, setHeatName] = useState('25F003353');
@@ -31,9 +30,8 @@ function App() {
   };
 
   return (
-    <div>
-      <Header />
-      <div className="container" id="heat-report__content">
+    <div className="container">
+      <div id="heat-report__content">
         <HeatReportHeader heatName={heatName} />
         <div className="section-row">
           {/* Cột 1: General + Operator Comment */}

@@ -1,5 +1,5 @@
 .container {
-  margin: 20px auto;
+  margin: 40px auto;
   padding: 20px;
   max-width: 1100px;
   font-family: Arial, sans-serif;
@@ -93,7 +93,7 @@
 
 .heat-report__search {
   position: fixed;
-  top:50px;
+  top: 70px;
   left: 86%;
   display: flex;
   align-items: center;
