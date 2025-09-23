@@ -1,11 +1,11 @@
-.heat-report-header {
+.shift-report-header {
   margin-top: 10px;
   width: 100%;
   font-size: 12px;
 }
 
 .header {
-  width: 1060px;
+  width: 1000px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +14,7 @@
   margin-bottom: 10px;
 }
 
-.heat-title {
+.shift-title {
   color: orange;
   font-size: 22px;
   font-weight: 100;
@@ -26,20 +26,3 @@
   width: auto;
 }
 
-.info-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 10px;
-  font-size: 12px;
-}
-
-.label {
-  color: gray;
-}
-
-.value {
-  color: black;
-  text-align: right;
-  min-width: 40px;
-}

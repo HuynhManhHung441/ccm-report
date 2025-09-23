@@ -1,133 +1,53 @@
-.container {
-  margin: 40px auto;
-  padding: 20px;
-  max-width: 1100px;
-  font-family: Arial, sans-serif;
-  box-sizing: border-box;
+
+/* Layout chính – KHÔNG nên canh giữa mọi thứ */
+#root {
+  margin: 0 auto;
+  padding: 0 0;
+  text-align: left; /* nên để left thay vì center cho giao diện thật */
 }
 
-/* Header */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 3px solid black;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
+.main-content {
+  padding-top: 140px; /* hoặc đúng bằng chiều cao .navbar */
 }
 
-.heat-title {
-  color: orange;
-  font-size: 22px;
-  font-weight: 100;
-  margin: 0;
-}
-
+/* Style cho logo nếu có */
 .logo {
-  height: 40px;
-  width: auto;
+  height: 6em;
+  padding: 1.5em;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-.info-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 10px;
-  font-size: 12px;
-}
-
-/* 4 cột */
-.section-row {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-  gap: 40px;
-}
-
-/* Mỗi cột */
-.column {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 25%; /* Mỗi cột chiếm 1/4 */
-}
-
-/* Section */
-.section {
-  width: 100%;
-}
-
-.section-title {
-  font-size: 14px;
-  color: orange;
-  margin-bottom: 7px;
-}
-
-.data-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  row-gap: 6px;
-  font-size: 12px;
-}
-
-.data-item {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.label {
-  color: gray;
-}
-
-.value {
-  color: black;
-  text-align: right;
-  min-width: 40px;
-}
-
-#heat-report__content {
-  position: relative;
-}
-
-.heat-report__search {
-  position: fixed;
-  top: 70px;
-  left: 86%;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-left: auto;
-}
-
-.heat-report__search input {
-  width: 130px;
-  padding: 8px 2px;
-  border: 1px solid #ccc;
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  background: #fff;
   border-radius: 8px;
-  font-size: 14px;
-  outline: none;
-  transition: border 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 32px 24px;
 }
 
-.heat-report__search input:focus {
-  border-color: #007bff;
+/* Animation nếu cần */
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.heat-report__search button {
-  width: 60px;
-  padding: 8px 2px;
-  background-color: #007bff;
-  color: white;
-  font-size: 14px;
-  font-weight: 500;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+/* Thẻ card */
+.card {
+  padding: 2em;
 }
 
-.heat-report__search button:hover {
-  background-color: #0056b3;
+/* Gợi ý tài liệu */
+.read-the-docs {
+  color: #888;
 }
