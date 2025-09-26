@@ -1,0 +1,62 @@
+.steel-grade-summary {
+  margin-top: 20px;          
+  padding-top: 15px;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  width: 50%;
+  text-align: center;
+}
+
+.section-title {
+  color: orange;
+  margin-bottom: 10px;
+  font-weight: lighter;
+}
+
+.steel-grade-summary-table {
+  border-collapse: collapse;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.steel-grade-summary-table th {
+  border-bottom: 2px solid #ccc;
+  padding: 6px 1px;
+  font-weight: 400;
+}
+
+.steel-grade-summary-table td {
+  padding: 0px 1px;
+  border-bottom: 3px solid #ddd; 
+}
+
+.steel-grade-summary-table th:first-child,
+.steel-grade-summary-table td:first-child {
+  text-align: left;
+  padding-left: 3px;
+}
+
+.steel-grade-summary-table th:nth-child(1){
+  width: 10%;
+}
+.steel-grade-summary-table th:nth-child(2),
+.steel-grade-summary-table th:nth-child(3){
+  width: 10%;
+}
+
+.steel-grade-summary-table th:nth-child(4),
+.steel-grade-summary-table th:nth-child(5) {
+  width: 15%;
+}
+
+.steel-grade-summary-table tbody tr:nth-child(even) td {
+  background-color: #d5d4d4;
+  font-weight: 500;
+}
+
+.steel-grade-summary-table tbody tr:nth-last-child(1) td {
+  background-color: #cafbff;
+  font-weight: 500;
+}
+
+
